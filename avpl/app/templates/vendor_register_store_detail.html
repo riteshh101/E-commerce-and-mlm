@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Vendor Registration {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_responsive.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>New Registration</strong></h1><br>
+
+
+      <div class="container register" style="border-radius: 1rem;">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p class="text-white">You are 30 seconds away from earning your own money!</p>
+                        <br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Vendor </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                <h3 class="register-heading">Vendor Store Details Form </h3>
+
+
+
+                                {% for message in messages %}
+                                    <span style="color:navy;">{{message}}</span>
+                                {% endfor %}
+                                <form action="{% url 'vendor_registration_store_detail' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                <div class="row register-form">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Store Name</label>
+                                            <input type="text" class="form-control" required placeholder="Store Name *" name="store_name" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Description</label>
+                                            <input type="text" class="form-control" required placeholder="Store Description *" name="store_description" value="" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Store Logo Pic</label>
+                                            <input type="file" class="form-control" required  name="store_logo" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Banner</label>
+                                            <input type="file" class="form-control" required name="store_banner" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Image</label>
+                                            <input type="file" name="store_image" required class="form-control">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Zipcode</label>
+                                            <input type="number" name="zipcode" required class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+                                            <label>Store Registration Number</label>
+                                            <input type="text" name="store_registration_number"  placeholder="Store Registration Number *" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Category</label>
+                                            <select class="form-control" name="category">
+
+                                                {% for x in category %}
+                                                <option value="{{x}}">{{x}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Opening Time</label>
+                                            <input type="time" class="form-control" required name="store_open_time" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Store Closing Time</label>
+                                            <input type="time"  class="form-control" required name="store_close_time"/>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label>Store Closing Day</label>
+                                            <select class="form-control" name="store_day">
+                                                <option class="hidden"  selected >Open Every Day</option>
+                                                <option value="Monday">Monday</option>
+                                                <option value="Tuesday">Tuesday</option>
+                                                <option value="Wednesday">Wednesday</option>
+                                                <option value="Thursday">Thursday</option>
+                                                <option value="Friday">Friday</option>
+                                                <option value="Saturday">Saturday</option>
+                                                <option value="Sunday">Sunday</option>
+                                            </select>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                            <label>Store Address</label>
+                                            <input type="text" placeholder="Enter Address.." required id="address" class="form-control" name="address"/>
+                                        </div>
+
+                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                    </div>
+                                </div>
+                                    </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<br><br>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'js/regular_custom.js' %}"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqBF76cMbvE_LREvm1S43LzZGxTsRQ0wA&libraries=places&callback=initialize"></script>
+<script>
+  function initialize() {
+    var input = document.getElementById('address');
+    new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener('place_changed', function () {
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+{% endblock %}

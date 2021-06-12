@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>{% block title %}Base{% endblock %}</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="avpl shop project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/fontawesome-free-5.0.1/css/fontawesome-all.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/slick-1.8.0/slick.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'styles/contact_responsive.css' %}">
+
+
+	{% block css %}
+
+	{% endblock %}
+
+</head>
+
+<body>
+
+<div class="super_container">
+
+	<!-- Header -->
+
+	<header class="header" style="background-color: azure;">
+
+		<!-- Top Bar -->
+
+		<div class="top_bar">
+			<div class="container">
+				<div class="row">
+					<div class="col d-flex flex-row">
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static 'images/phone.png' %}" alt=""></div>+91 7533904932</div>
+						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="{% static 'images/mail.png' %}" alt=""></div><a href="mailto:sd@gmail.com">riteshh101@gmail.com</a></div>
+						<div class="top_bar_content ml-auto">
+							<div class="top_bar_menu">
+								<ul class="standard_dropdown top_bar_dropdown">
+																							<li>
+<a href="#">Search Store<i class="fas fa-chevron-down"></i></a>
+<ul>
+<li><a href="#" data-toggle="modal" data-target="#Location"> Search By Location</a></li>
+<!--<li><a href="#" data-toggle="modal" data-target="#myModal"> Search By Longitude & Latitude</a></li>-->
+</ul>
+</li>
+								</ul>
+							</div>
+
+							<div class="top_bar_user">
+								{% if request.user.is_authenticated %}
+								<div><a href="{% url 'logout' %}">Logout</a></div>
+								{% else %}
+								<div class="user_icon"><img src="{% static 'images/user.svg' %}" alt=""></div>
+								<div><a href="{% url 'registration' %}">Register</a></div>
+								<div class="user_icon"><img src="{% static 'images/user.svg' %}" alt=""></div>
+								<div><a href="{% url 'vendorregistration' %}">VendorRegister</a></div> &emsp;
+								<div><a href="{% url 'login' %}">Sign in</a></div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Header Main -->
+
+		<div class="header_main">
+			<div class="container">
+				<div class="row">
+
+					<!-- Logo -->
+					<div class="col-lg-2 col-sm-3 col-3 order-1">
+						<div class="logo_container">
+							<div class="logo"><a href="{% url 'home' %}">RSM</a></div>
+						</div>
+					</div>
+
+					<!-- Search -->
+					<div style="display: none;" class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+						<div class="header_search">
+							<div class="header_search_content">
+								<div class="">
+									<form action="#" class="header_search_form clearfix">
+										<div class="custom_dropdown">
+											<div class="custom_dropdown_list">
+												<span class="custom_dropdown_placeholder clc"></span>
+
+												<ul class="custom_list clc">
+													<li><a class="clc" href="#">All Categories</a></li>
+													<li><a class="clc" href="#">Computers</a></li>
+													<li><a class="clc" href="#">Laptops</a></li>
+													<li><a class="clc" href="#">Cameras</a></li>
+													<li><a class="clc" href="#">Hardware</a></li>
+													<li><a class="clc" href="#">Smartphones</a></li>
+												</ul>
+											</div>
+										</div>
+<!--										<button type="submit" class="header_search_button trans_300" value="Submit"><img src="{% static 'images/search.png' %}" alt=""></button>-->
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Wishlist -->
+					{% if request.user.is_authenticated %}
+					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right " >
+						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
+								<div class="wishlist_icon"><a href="{% url 'wishlist' %}"><img src="{% static 'images/heart.png' %}" alt=""></a></div>
+								<div class="wishlist_content">
+									<div class="wishlist_text"><a href="{% url 'wishlist' %}">Wishlist</a></div>
+<!--									<div class="wishlist_count">115</div>-->
+								</div>
+							</div>
+
+							<!-- Cart -->
+							<a href="{% url 'cart_show' %}">
+							<div class="cart">
+								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
+									<div class="cart_icon">
+										<img src="{% static 'images/cart.png' %}" alt="">
+										<div class="cart_count"><span>{{cart_count}}</span></div>
+									</div>
+									<div class="cart_content">
+										<div class="cart_text"><a href="{% url 'cart_show' %}">Cart</a></div>
+<!--										<div class="cart_price">$85</div>-->
+									</div>
+								</div>
+							</div>
+								</a>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<!-- Main Navigation -->
+
+		<nav class="main_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+
+						<div class="main_nav_content d-flex flex-row">
+
+							<!-- Categories Menu -->
+
+							<div class="cat_menu_container">
+								<div class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+<!--									<div class="cat_burger"><span></span><span></span><span></span></div>-->
+<!--									<div class="cat_menu_text"></div>-->
+								</div>
+
+<!--								<ul class="cat_menu">-->
+<!--									<li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>-->
+<!--									<li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li class="hassubs">-->
+<!--										<a href="#">Hardware<i class="fas fa-chevron-right"></i></a>-->
+<!--										<ul>-->
+<!--											<li class="hassubs">-->
+<!--												<a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>-->
+<!--												<ul>-->
+<!--													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--													<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--												</ul>-->
+<!--											</li>-->
+<!--											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--											<li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>-->
+<!--										</ul>-->
+<!--									</li>-->
+<!--									<li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>-->
+<!--									<li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>-->
+<!--								</ul>-->
+							</div>
+
+							<!-- Main Nav Menu -->
+
+							<div class="main_nav_menu ml-auto">
+								<ul class="standard_dropdown main_nav_dropdown">
+									<li><a href="{% url 'home' %}">Home<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{% url 'home' %}">About<i class="fas fa-chevron-down"></i></a></li>
+
+
+									<li class="hassubs">
+										<a href="#">Pages<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="{% url 'home' %}">Home<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="">About<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="{% url 'contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
+											{% if request.user.is_authenticated %}
+											<li><a href="{% url 'logout' %}">Logout<i class="fas fa-chevron-down"></i></a></li>
+											{% else %}
+											<li><a href="{% url 'registration' %}">UserSignUp<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="{% url 'vendorregistration' %}">VendorSignUp<i class="fas fa-chevron-down"></i></a></li>
+											<li><a href="{% url 'login' %}">Login<i class="fas fa-chevron-down"></i></a></li>
+											{% endif %}
+										</ul>
+									</li>
+									<li><a href="{% url 'contact' %}">Contact<i class="fas fa-chevron-down"></i></a></li>
+
+
+									{% if request.user.is_authenticated %}
+									{% if request.user.user_register %}
+									<li><a href="{% url 'user_dashboard' %}">Dashboard<i class="fas fa-chevron-down"></i></a></li>
+									{% else %}
+									<li><a href="{% url 'vendor_profile' %}">Dashboard<i class="fas fa-chevron-down"></i></a></li>
+									{% endif %}
+									<li><a href="{% url 'logout' %}">Logout<i class="fas fa-chevron-down"></i></a></li>
+									{% else %}
+
+									<li><a href="{% url 'registration' %}">Register<i class="fas fa-chevron-down"></i></a></li>
+									<li><a href="{% url 'vendorregistration' %}">Vendor Register<i class="fas fa-chevron-down"></i></a></li>
+
+									<li><a href="{% url 'login' %}">Login<i class="fas fa-chevron-down"></i></a></li>
+									{% endif %}
+
+								</ul>
+							</div>
+
+							<!-- Menu Trigger -->
+
+							<div class="menu_trigger_container ml-auto">
+								<div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+									<div class="menu_burger">
+										<div class="menu_trigger_text">menu</div>
+										<div class="cat_burger menu_burger_inner"><span></span><span></span><span></span></div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="page_menu">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+
+						<div class="page_menu_content">
+
+							<div class="page_menu_search">
+								<form action="#">
+									<input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
+								</form>
+							</div>
+							<ul class="page_menu_nav">
+								<li class="page_menu_item has-children">
+									<a href="#">Language<i class="fa fa-angle-down"></i></a>
+									<ul class="page_menu_selection">
+										<li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
+									</ul>
+								</li>
+								<li class="page_menu_item has-children">
+									<a href="#">Currency<i class="fa fa-angle-down"></i></a>
+									<ul class="page_menu_selection">
+										<li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
+									</ul>
+								</li>
+								<li class="page_menu_item">
+									<a href="">Home<i class="fa fa-angle-down"></i></a>
+								</li>
+								<li class="page_menu_item has-children">
+									<a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
+									<ul class="page_menu_selection">
+										<li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
+										<li class="page_menu_item has-children">
+											<a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
+											<ul class="page_menu_selection">
+												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+												<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+											</ul>
+										</li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+									</ul>
+								</li>
+								<li class="page_menu_item has-children">
+									<a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
+									<ul class="page_menu_selection">
+										<li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+									</ul>
+								</li>
+								<li class="page_menu_item has-children">
+									<a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
+									<ul class="page_menu_selection">
+										<li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+										<li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+									</ul>
+								</li>
+								<li class="page_menu_item"><a href="">blog<i class="fa fa-angle-down"></i></a></li>
+								<li class="page_menu_item"><a href="">contact<i class="fa fa-angle-down"></i></a></li>
+							</ul>
+
+							<div class="menu_contact">
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="{% static 'images/phone_white.png' %}" alt=""></div>+91 068 005 3570</div>
+								<div class="menu_contact_item"><div class="menu_contact_icon"><img src="{% static 'images/mail_white.png' %}" alt=""></div><a href="mailto:sd@gmail.com">sd@gmail.com</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+	<!-- header -->
+	{% block body %}
+
+    {% endblock %}
+	<!-- Newsletter -->
+
+	<!-- Modal popup Search Store By Location -->
+<div class="container-fluid">
+<h2></h2><!--Search by location  -->
+<!-- The Modal -->
+<div class="modal" id="Location">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<!-- Modal Header -->
+<div class="modal-header">
+<h4 class="modal-title">Get Location by Address</h4>
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+<!-- Modal body -->
+	<form action="{% url 'shop_near_about' %}" method="post">
+		{% csrf_token %}
+
+<div class="modal-body">
+
+<select class="form-control" name="category">
+                <option class="hidden"  selected disabled>Select Store Category </option>
+                {% for x in cat %}
+                <option value={{x}}>{{x}}</option>
+                {% endfor %}
+            </select><br>
+
+<input type="text" id="address" class="form-control" name="adrs" placeholder="enter your location">
+
+</div>
+
+<!-- Modal footer -->
+<div class="modal-footer">
+<input type="submit" class="btn btn-success" />
+<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>
+
+
+</form>
+</div>
+</div>
+</div>
+
+</div>
+
+<!--// Modal popup -->
+<!-- Modal popup Search Store By Lon lat -->
+<!--<div class="container-fluid">-->
+<!--<h2></h2>&lt;!&ndash; Search by lon lat&ndash;&gt;-->
+<!--&lt;!&ndash; The Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="myModal">-->
+<!--<div class="modal-dialog">-->
+<!--<div class="modal-content">-->
+
+<!--&lt;!&ndash; Modal Header &ndash;&gt;-->
+<!--<div class="modal-header">-->
+<!--<h4 class="modal-title">Click on current location for get lat/lng</h4>-->
+<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Modal body &ndash;&gt;-->
+<!--	<form action="" method="post">-->
+<!--		{% csrf_token %}-->
+<!--<div class="modal-body">-->
+<!--<select class="form-control" name="category">-->
+<!--                <option class="hidden"  selected disabled>Search Store Category</option>-->
+<!--                {% for x in category_loc %}-->
+<!--                <option value={{x}}>{{x}}</option>-->
+<!--                {% endfor %}-->
+<!--            </select><br>-->
+<!--	<label>Latitude</label>-->
+<!--<input type="text" id="demo1" value="" name="latitude" readonly class="form-control">-->
+<!--	<label>Longitude</label>-->
+<!--	<input type="text" id="demo2"  name="longitude" readonly class="form-control">-->
+<!--</div>-->
+<!--		<input type="submit" class="btn btn-success mx-2"/>-->
+<!--		<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+
+
+<!--		</form>-->
+<!--&lt;!&ndash; Modal footer &ndash;&gt;-->
+<!--<div class="modal-footer">-->
+<!--<button class="btn btn-secondery " onclick="getLocation()"><i-->
+<!--                                    class="fa fa-location-arrow" aria-hidden="true"></i>current location</button>-->
+
+<!--</div>-->
+
+
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</div>-->
+
+
+<!--// Modal popup -->
+	<!-- Footer -->
+
+	<footer class="footer" style="background-color: azure;">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-lg-3 footer_col">
+					<div class="footer_column footer_contact">
+						<div class="logo_container">
+							<div class="logo"><a href="#">RSM</a></div>
+						</div>
+						<div class="footer_title">Got Question? Call Us 24/7</div>
+						<div class="footer_phone">+91 7533904932</div>
+						<div class="footer_contact_text">
+							<p>142, S-5, Vikas Nagar Lucknow</p>
+							<p>UP, India, 226022</p>
+						</div>
+						<div class="footer_social">
+							<ul>
+								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+								<li><a href="#"><i class="fab fa-google"></i></a></li>
+								<li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-2 offset-lg-2">
+					<div class="footer_column">
+						<div class="footer_title">Find it Fast</div>
+						<ul class="footer_list">
+							<li><a href="#">Computers & Laptops</a></li>
+							<li><a href="#">Cameras & Photos</a></li>
+							<li><a href="#">Hardware</a></li>
+							<li><a href="#">Smartphones & Tablets</a></li>
+							<li><a href="#">TV & Audio</a></li>
+						</ul>
+						<div class="footer_subtitle">Gadgets</div>
+						<ul class="footer_list">
+							<li><a href="#">Car Electronics</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-2">
+					<div class="footer_column">
+						<ul class="footer_list footer_list_2">
+							<li><a href="#">Video Games & Consoles</a></li>
+							<li><a href="#">Accessories</a></li>
+							<li><a href="#">Cameras & Photos</a></li>
+							<li><a href="#">Hardware</a></li>
+							<li><a href="#">Computers & Laptops</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-2">
+					<div class="footer_column">
+						<div class="footer_title">Customer Care</div>
+						<ul class="footer_list">
+							<li><a href="#">My Account</a></li>
+							<li><a href="#">Order Tracking</a></li>
+							<li><a href="#">Wish List</a></li>
+							<li><a href="#">Customer Services</a></li>
+							<li><a href="#">Returns / Exchange</a></li>
+							<li><a href="#">FAQs</a></li>
+							<li><a href="#">Product Support</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</footer>
+
+	<!-- Copyright -->
+
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+
+					<div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+						<div class="copyright_content">
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved |rsm<i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">rsm</a>
+
+</div>
+						<div class="logos ml-sm-auto">
+							<ul class="logos_list">
+								<li><a href="#"><img src="{% static 'images/logos_1.png' %}" alt=""></a></li>
+								<li><a href="#"><img src="{% static 'images/logos_2.png' %}" alt=""></a></li>
+								<li><a href="#"><img src="{% static 'images/logos_3.png' %}" alt=""></a></li>
+								<li><a href="#"><img src="{% static 'images/logos_4.png' %}" alt=""></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'js/blog_single_custom.js' %}"></script>
+
+{% block script %}
+
+{% endblock %}
+</body>
+
+</html>
+
+<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqBF76cMbvE_LREvm1S43LzZGxTsRQ0wA&libraries=places"></script>
+
+<script>
+  function initialize() {
+    var input = document.getElementById('address');
+    new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener('place_changed', function () {
+    });
+  }
+
+  google.maps.event.addDomListener(window,'load', initialize);
+
+
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("demo1").setAttribute('value', position.coords.latitude)
+        document.getElementById("demo2").setAttribute('value', position.coords.longitude)
+    }
+
+
+
+    </script>

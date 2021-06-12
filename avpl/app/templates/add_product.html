@@ -1,0 +1,84 @@
+{% extends 'vendor_dashboard.html' %}
+
+{% block title %} Add Product {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full bg-white">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+<div class="container">
+<h1 class="my-5" style="color:blue;">Product Add</h1>
+    {% for message in messages %}
+    <span style="color:green;">{{message}}</span>
+    {% endfor %}
+        <div class="col-md-8">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+        <div class="form-group">
+        <label>Select Product</label>
+            <select class="custom-select select2" name="select_product">
+<!--                <option class="hidden"  selected disabled>Select Product</option>-->
+                {% for x in subcategory %}
+                <option value={{x.id}}>{{x}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <div class="form-group">
+        <label>Select Brand</label>
+        <select class="custom-select select2" name="select_brand">
+<!--                <option class="hidden"  selected disabled>Select Brand</option>-->
+                {% for x in brand %}
+                <option value={{x.id}}>{{x}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <div class="form-group">
+        <label>Product Title</label>
+        <input type="text" class="form-control" placeholder="" name="title" required>
+        </div>
+
+            <div class="form-group">
+        <label>Product Price</label>
+        <input type="number" class="form-control" name="price" placeholder="Price provide here exclude GST" required>
+        </div>
+
+            <div class="form-group">
+        <label>GST</label>
+        <input type="number" class="form-control" name="gst" placeholder="" required>
+        </div>
+
+                <div class="form-group">
+        <label>Discount(If you want provide Discount on this Product every variants)</label>
+        <input type="number" class="form-control" name="discount" placeholder="If you want provide Discount on this Product every variants..">
+        </div>
+
+
+                <div class="form-group">
+                <label>Front View Product Image Upload</label>
+                    <input type="file" class="form-control" name="front_image" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Variant available on</label>
+                    <select class="custom-select select2 " name="value">
+                <option class="" value="Size"  selected>Size</option>
+                <option class="" value="Color" >Color</option>
+                <option class="" value="Size-Color" >Size-Color</option>
+
+            </select>
+                </div>
+
+
+                <br>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Add Product">
+                </form>
+            </div>
+
+</div>
+    </div>
+</div>
+{% endblock %}

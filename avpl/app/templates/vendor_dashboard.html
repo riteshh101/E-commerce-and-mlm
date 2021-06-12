@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--    <link rel="icon" href="{% static 'assets/img/basic/favicon.ico' %}" type="image/x-icon">-->
+    <title>{% block title %}Vendor Dashboard{% endblock %}</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <style>
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F8FA;
+            z-index: 9998;
+            text-align: center;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+    {% block css %}
+
+    {% endblock %}
+    <!-- Js -->
+    <!--
+    --- Head Part - Use Jquery anywhere at page.
+    --- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
+    -->
+    <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
+</head>
+<body class="light">
+<!-- Pre loader -->
+<div id="loader" class="loader">
+    <div class="plane-container">
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app">
+<script>
+    /*
+     *  Add sidebar classes (sidebar-mini sidebar-collapse sidebar-expanded-on-hover) in body tag
+     *  you can remove this script tag and add classes directly to body
+     *  this is only for demo
+     */
+    document.body.className += ' sidebar-mini' + ' sidebar-collapse' + ' sidebar-expanded-on-hover' + ' sidebar-top-offset';
+</script>
+<aside class="main-sidebar fixed offcanvas b-r" data-toggle='offcanvas'>
+    <section class="sidebar">
+        <ul class="sidebar-menu mt-4">
+            <li class="treeview"><a href="#">
+                <i class="icon icon-sailing-boat-water s-24"></i> <span>Dashboard</span> <i
+                    class=" icon-angle-left  pull-right"></i>
+            </a>
+                <ul class="treeview-menu">
+                    <li><a href=""><i class="icon icon-folder5"></i>Panel Dashboard 1</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="treeview"><a href="{% url 'home' %}">
+                <i class="icon icon icon-package s-24"></i>
+                <span>E-commerce Store</span>
+
+            </a>
+            </li>
+            <li class="treeview"><a href="#"><i class="icon icon-account_box s-24"></i>Profile<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'vendor_profile' %}"><i class="icon icon-circle-o"></i>Profile View</a>
+                    </li>
+                    <li><a href="{% url 'vendor_edit_profile' %}"><i class="icon icon-add"></i>Edit Profile</a>
+                    </li>
+                    <li><a href="{% url 'vendor_changepassword' %}"><i class="icon icon-edit"></i>Change Password</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="treeview"><a href="#"><i class="icon icon icon-package s-24"></i>Product<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'add_product' %}"><i class="icon icon-add"></i>Add Product</a>
+                    </li>
+                    <li><a href="{% url 'product_varient' %}"><i class="icon icon-add"></i>Add Product Varient</a>
+                    </li>
+                    <li><a href="{% url 'all_product_dashboard' %}"><i class="icon icon-circle-o"></i>All Products</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="treeview"><a href="#"><i class="icon icon icon-package s-24"></i>Store<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'store_view' %}"><i class="icon icon-circle-o"></i>Store View</a>
+                    </li>
+                    <li><a href="{% url 'store_update' %}"><i class="icon icon-add"></i>Store Update</a>
+                    </li>
+
+                </ul>
+            </li>
+
+             <li class="treeview"><a href="#"><i class="icon icon icon-package s-24"></i>Self Picking Order<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'pending_order' %}"><i class="icon icon-circle-o"></i>Pending Order</a>
+                    </li>
+                    <li><a href="{% url 'deliver_order' %}"><i class="icon icon-add"></i>Delivered Order</a>
+                    </li>
+                    <li><a href="{% url 'cancel_order' %}"><i class="icon icon-add"></i>Cancel Order</a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+
+             <li class="treeview"><a href="#"><i class="icon icon icon-package s-24"></i>Delivery Order<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'delivery_pending_order' %}"><i class="icon icon-circle-o"></i>Pending Order</a>
+                    </li>
+                    <li><a href="{% url 'deliver_confirm' %}"><i class="icon icon-add"></i>Delivered Order</a>
+                    </li>
+                    <li><a href="{% url 'deliver_cancle' %}"><i class="icon icon-add"></i>Cancel Order</a>
+
+
+                </ul>
+            </li>
+
+            <li class="treeview"><a href="#"><i class="icon icon icon-package s-24"></i>Time Slot<i
+                    class=" icon-angle-left  pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{% url 'time_slot_create' %}"><i class="icon icon-circle-o"></i>Create Time Slot</a>
+                    </li>
+
+
+
+                </ul>
+            </li>
+
+
+
+
+        </ul>
+
+    </section>
+</aside>
+<!--Sidebar End-->
+<div class="sticky">
+    <div class="navbar navbar-expand d-flex justify-content-between bd-navbar white b-b">
+        <div class="relative">
+            <div class="d-flex">
+                <div>
+                    <a href="#" data-toggle="push-menu" class="paper-nav-toggle pp-nav-toggle">
+                        <i></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <!--Top Menu Start -->
+        <div class="navbar-custom-menu d-flex align-items-center">
+            <ul class="nav navbar-nav">
+                <!-- Messages-->
+                <li class="dropdown custom-dropdown messages-menu">
+                    <a href="#" class="nav-link pl-lg-3 pr-lg-3 b-l" data-toggle="dropdown">
+                        <i class="icon-message "></i>
+                        <span class="badge badge-success badge-mini rounded-circle">4</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu pl-2 pr-2">
+                                <!-- start message -->
+                                <li>
+                                    <a href="#">
+                                        <div class="avatar float-left">
+                                            <img src="{% static 'assets/img/dummy/u4.png' %}" alt="">
+                                            <span class="avatar-badge busy"></span>
+                                        </div>
+                                        <h4>
+                                            Support Team
+                                            <small><i class="icon icon-clock-o"></i> 5 mins</small>
+                                        </h4>
+                                        <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                </li>
+                                <!-- end message -->
+
+
+
+                            </ul>
+                        </li>
+                        <li class="footer s-12 p-2 text-center"><a href="#">See All Messages</a></li>
+                    </ul>
+                </li>
+                <!-- Notifications -->
+                <li class="dropdown custom-dropdown notifications-menu">
+                    <a href="#" class="nav-link  b-r b-l pl-lg-3 pr-lg-3" data-toggle="dropdown" aria-expanded="false">
+                        <i class="icon-notifications "></i>
+                        <span class="badge badge-danger badge-mini rounded-circle">4</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="header">You have 10 notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon icon-data_usage text-success"></i> 5 new members joined today
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="footer p-2 text-center"><a href="#">View all</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+            <!-- Button -->
+            <div>
+                <a href="{% url 'logout' %}" class="btn btn-primary btn-sm ml-3 d-none d-sm-block">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+    {% block body %}
+
+    {% endblock %}
+
+<!-- /.right-sidebar -->
+<!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+
+</div>
+<!--/#app -->
+<script src="{% static 'assets/js/app.js' %}"></script>
+
+
+
+
+<!--
+--- Footer Part - Use Jquery anywhere at page.
+--- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
+-->
+<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
+{% block script %}
+
+{% endblock %}
+</body>
+</html>

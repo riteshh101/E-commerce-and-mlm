@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}  {% endblock %}
+
+{% block css %}   {% endblock %}
+
+
+{% block body %}
+
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Select Payment Method</strong></h1><br>
+ <div class="container">
+<form action="{% url 'by_delivery_mode' %}" method="post">
+    {% csrf_token %}
+
+
+<div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+    <div class="contact_form_title text-left text-primary">Select Order Mode</div>
+<div class="form-group">
+<ul class="logos_list">
+    <input type="hidden" value="{{ob}}" name="address"/>
+	<li><input type="radio" name="payment" value="Wallet" required><img src="{% static 'images/wallet.png' %}" title="Wallet" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+	<li><input type="radio" name="payment" value="Razorpay" required><img src="{% static 'images/razorpay.png' %}" title="Razorpay" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+<li><input type="radio" name="payment" value="COD" required><img src="{% static 'images/cod.png' %}" title="Cash On Delivery" style="width: 80px; height: 60px;margin-left:10px;"> </li>
+
+</ul>
+
+</div>
+
+
+            <div class="contact_form_button text-center">
+<button type="submit" class="btn btn-info">Continue for Pay</button>
+</div>
+    </div>
+    </form>
+</div>
+{% endblock %}

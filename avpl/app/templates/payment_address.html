@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}  {% endblock %}
+
+{% block css %}
+
+
+{% endblock %}
+
+
+{% block body %}
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Shipping Address</strong></h1><br>
+ <div class="container">
+
+<!--     <div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">-->
+
+<!--		<div class="col-lg-12 col-sm-12 hero-feature">-->
+<!--			<div class="table-responsive">-->
+<!--				<table class="table table-bordered tbl-cart">-->
+<!--					<thead>-->
+<!--						<tr>-->
+<!--							<td class="hidden-xs">Image</td>-->
+<!--							<td>Product Name</td>-->
+<!--							<td>Size</td>-->
+<!--							<td>Color</td>-->
+<!--							<td class="td-qty">Quantity</td>-->
+<!--							<td>PV</td>-->
+<!--							<td>Sub Total</td>-->
+
+<!--						</tr>-->
+<!--					</thead>-->
+<!--					<tbody>-->
+<!--					{% for x in cart_featch %}-->
+<!--						<tr>-->
+<!--							<td class="hidden-xs">-->
+
+<!--									<img src="/media/{{x.variant_id.image_fornt}}" alt="Age Of Wisdom Tan Graphic Tee" title="" width="47" height="47">-->
+
+<!--							</td>-->
+<!--							<td>{{x.variant_id.title}}-->
+<!--							</td>-->
+<!--							<td>-->
+<!--								{{x.variant_id.size}}-->
+<!--							</td>-->
+<!--							<td>{{x.variant_id.color}}</td>-->
+<!--							<td class="text-center">-->
+<!--								{{x.quantity}}-->
+<!--							</td>-->
+<!--							<td class="price">no data</td>-->
+<!--							<td>Rs.{{x.final_price}}</td>-->
+
+<!--						</tr>-->
+<!--					{% endfor %}-->
+<!--						<tr>-->
+<!--							<td colspan="6" align="right">Total</td>-->
+<!--							<td class="total" colspan="2"><b>Rs.{{total_pay}}</b>-->
+<!--							</td>-->
+<!--						</tr>-->
+<!--					</tbody>-->
+<!--				</table>-->
+<!--			</div>-->
+
+<!--		</div>-->
+<!--	</div>-->
+	<!-- End Cart -->
+
+<!--	&lt;!&ndash; End Cart &ndash;&gt;-->
+<!--	 <div class="col-lg-12" style="border:1px solid skyblue; padding:20px; border-radius:25px;">-->
+<!--		 <div class="contact_form_container">-->
+
+
+<!--			 <div class="form-group">-->
+<!--			 <h4>Continue with saved Address</h4><hr>-->
+<!--			 <div class="container">-->
+<!--<div class="row">-->
+<!--   <div class="container">-->
+
+
+
+<!--  <div class="row">-->
+
+<!--      <div class="col-md-4 col-lg-4 col-sm-4 my-2"  >-->
+<!-- <div class="card" style="width: 18rem;">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">User Name</h5>-->
+<!--    <h6 class="card-subtitle mb-2 text-muted">User Mobile Number</h6>-->
+<!--    <p class="card-text">User Address</p>-->
+<!--    <a href="#" class="card-link">Edit Detail</a>-->
+<!--    <a href="#" class="card-link">Remove</a>-->
+<!--  </div>-->
+<!--</div>-->
+<!--   </div>-->
+
+
+
+<!--	  <div class="col-md-4 col-lg-4 col-sm-4 my-2"  >-->
+<!-- <div class="card" style="width: 18rem;">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">User Name</h5>-->
+<!--    <h6 class="card-subtitle mb-2 text-muted">User Mobile Number</h6>-->
+<!--    <p class="card-text">User Address</p>-->
+<!--    <a href="#" class="card-link">Edit Detail</a>-->
+<!--    <a href="#" class="card-link">Remove</a>-->
+<!--  </div>-->
+<!--</div>-->
+<!--   </div>-->
+
+
+<!--	  <div class="col-md-4 col-lg-4 col-sm-4 my-2"  >-->
+<!-- <div class="card" style="width: 18rem;">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">User Name</h5>-->
+<!--    <h6 class="card-subtitle mb-2 text-muted">User Mobile Number</h6>-->
+<!--    <p class="card-text">User Address</p>-->
+<!--    <a href="#" class="card-link">Edit Detail</a>-->
+<!--    <a href="#" class="card-link">Remove</a>-->
+<!--  </div>-->
+<!--</div>-->
+<!--   </div>-->
+
+
+<!--	  <div class="col-md-4 col-lg-4 col-sm-4 my-2"  >-->
+<!-- <div class="card" style="width: 18rem;">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title">User Name</h5>-->
+<!--    <h6 class="card-subtitle mb-2 text-muted">User Mobile Number</h6>-->
+<!--    <p class="card-text">User Address</p>-->
+<!--    <a href="#" class="card-link">Edit Detail</a>-->
+<!--    <a href="#" class="card-link">Remove</a>-->
+<!--  </div>-->
+<!--</div>-->
+<!--   </div>-->
+
+
+<!--  </div>-->
+
+<!--</div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+<!--		 </div>-->
+
+<!--	 </div>-->
+
+<!-- </div>-->
+
+<div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+	{% for message in messages %}
+	<span style="color:red;">{{message}}</span>
+	{% endfor %}
+    <div class="contact_form_container">
+<form action=""  method="post">
+{% csrf_token %}
+	<input type="hidden" value="{{order_mode}}" name="order_mode">
+<div class="row"><!--row-->
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label>Refer Code</label>
+			<input type="text" name="refer_code" class="form-control" value="{{refer_id}}" placeholder="Enter Refer Code if you have">
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label>Select Position</label>
+			<select name="value" class="form-control">
+				<option selected="left" value="left">Left</option>
+				<option value="right">Right</option>
+			</select>
+		</div>
+	</div>
+	<input type="hidden" value="{{store_user}}" name="store_user">
+    <div class="col-lg-6"><!--col-lg-6-->
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" class="form-control" value="{{name}}" aria-describedby="emailHelp" placeholder="Enter Your Full Name " name="name" required="">
+            </div>
+        </div>
+
+        <div class="col-lg-6"><!--col-lg-6-->
+            <div class="form-group">
+            <label>Phone</label>
+            <input type="number" class="form-control" value="{{phone}}"  aria-describedby="emailHelp" placeholder="Enter Your Phone " name="phone" required="">
+            </div>
+        </div>
+
+    </div>
+    <div class="row"><!--row-->
+        <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" value="{{email}}" aria-describedby="emailHelp" placeholder="Enter Your Email " name="email" required="">
+            </div>
+        </div>
+
+        <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" value="{{address}}" aria-describedby="emailHelp" id="address" placeholder="Enter Your Address" name="address" required="">
+            </div>
+        </div>
+
+         <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" class="form-control" value="{{city}}"  aria-describedby="emailHelp" placeholder="Enter Your City" name="city" required="">
+                </div>
+            </div>
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <label>Pincode</label>
+                <input type="number" class="form-control" value="{{pincode}}"  aria-describedby="emailHelp" placeholder="Pincode" name="pincode" required="">
+                </div>
+            </div>
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <label>Locality</label>
+                <input type="text" class="form-control" value="{{locality}}"  aria-describedby="emailHelp" placeholder="Locality" name="locality" required="">
+                </div>
+            </div>
+
+
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <label>Landmark</label>
+                <input type="text" class="form-control" value="{{landmark}}" aria-describedby="emailHelp" placeholder="Landmark (Optional)" name="landmark" >
+                </div>
+            </div>
+
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <label>Alternate Phone</label>
+                <input type="number" class="form-control"  value="{{alternate_mobile}}" aria-describedby="emailHelp" placeholder="Alternate Mobile(Optional)" name="alternate_phone" >
+                </div>
+            </div>
+    </div>
+</div>
+
+<!--<div class="contact_form_title text-left text-primary">Select Order Mode</div>-->
+<!--<div class="form-group">-->
+<!--<ul class="logos_list">-->
+<!--	<li><input type="radio" name="order_mode" value="self_picking" required><span style="margin-left:10px;">By Self Picking</span> </li>-->
+
+<!--	<li><input type="radio" name="order_mode" value="by_delivery" required><span style="margin-left:10px;">By Delivery</span></li>-->
+
+<!--&lt;!&ndash;<li><input type="radio" name="payment" value="pay_cod"><img src="{% static 'images/cod.png' %}" title="Cash On Delivery" style="width: 80px; height: 60px;margin-left:10px;"> </li>&ndash;&gt;-->
+
+<!--</ul>-->
+
+<!--</div>-->
+
+<div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+<div class="contact_form_title text-left text-primary">Select Order Mode</div>
+<div class="form-group">
+<ul class="logos_list">
+	<li><input type="radio" name="payment" value="Wallet" required><img src="{% static 'images/wallet.png' %}" title="Wallet" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+	<li><input type="radio" name="payment" value="Razorpay" required><img src="{% static 'images/razorpay.png' %}" title="Razorpay" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+<li><input type="radio" name="payment" value="COD" required><img src="{% static 'images/cod.png' %}" title="Cash On Delivery" style="width: 80px; height: 60px;margin-left:10px;"> </li>
+
+</ul>
+
+</div>
+            <div class="contact_form_button text-center">
+<button type="submit" class="btn btn-info">Continue</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+ </div>
+
+<div class="panel"></div>
+
+
+<br><br>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+	<script type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqBF76cMbvE_LREvm1S43LzZGxTsRQ0wA&libraries=places"></script>
+
+<script>
+  function initialize() {
+    var input = document.getElementById('address');
+    new google.maps.places.Autocomplete(input);
+    google.maps.event.addListener('place_changed', function () {
+    });
+  }
+
+  google.maps.event.addDomListener(window,'load', initialize);
+
+
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("demo1").setAttribute('value', position.coords.latitude)
+        document.getElementById("demo2").setAttribute('value', position.coords.longitude)
+    }
+
+
+
+
+</script>
+{% endblock %}

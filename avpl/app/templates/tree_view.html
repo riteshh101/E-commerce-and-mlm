@@ -1,0 +1,75 @@
+{% extends 'user_dashboard.html' %}
+{% load static %}
+{% block title %} Edit Profile {% endblock %}
+
+{% block css %}  {% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full" style="background-color:white;">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5" >
+
+	<!-- Tree -->
+	<div class="container-fluid">
+		<div class="row mt-5 my-5">
+		<div class="col-md-5"></div>
+			<div class="col-md-4">
+			<form action="" method="post">
+				{% csrf_token %}
+
+				<input type="text" required name="name" placeholder="Enter Refer Code Here..">
+				<input type="submit" value="Search" class="btn btn-info btn-sm">
+				<p>
+{% for message in messages %}
+              <span class="text-danger" style="margin-left:30px;">{{message}}</span>
+              {% endfor %}
+    </p>
+
+			</form>
+</div>
+			<div class="col-md-4 col-lg-4"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p class="text-center"><strong>Left :{{left}}</strong></p>
+			</div>
+			<div class="col-lg-6">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{obj}}</strong></p></a>
+			</div>
+			<div class="col-lg-3">
+				<p class="text-center"><strong>Right :{{right}}</strong></p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{obb.0}}</strong></p></a>
+			</div>
+			<div class="col-lg-6">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{obb.1}}</strong></p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{lv_1_child.0}}</strong></p></a>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{lv_1_child.1}}</strong></p></a>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{lv_2_child.0}}</strong></p></a>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-center"><img src="{% static 'images/shops_imgs/tree_user_img.jpg' %}" height="90px" width="90px" alt=""><br><strong>{{lv_2_child.1}}</strong></p></a>
+			</div>
+		</div>
+	</div>
+
+<!-- Tree -->
+
+</div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Vendor Registration {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_responsive.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Waiting</strong></h1><br>
+
+
+      <div class="container register" style="border-radius: 1rem;">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p class="text-white">You are 30 seconds away from earning your own money!</p>
+                        <br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">User </a>
+                            </li>
+
+                        </ul>
+
+                                <div class="container-fluid">
+<div class="row">
+<div class="col-sm-12 text-center">
+                                {% for message in messages %}
+                                <h3 class="register-heading">{{message}}</h3>
+                                {% endfor %}
+</div>
+</div>
+</div>
+
+                                        </div>
+                                </div>
+
+                            </div>
+
+
+<br><br>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'js/regular_custom.js' %}"></script>
+
+{% endblock %}

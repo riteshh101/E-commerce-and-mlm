@@ -1,0 +1,96 @@
+{% extends 'vendor_dashboard.html' %}
+
+{% block title %} Add Product {% endblock %}
+
+{% block css %}  {% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full bg-white">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+<div class="container">
+<h1 class="my-5" style="color:blue;">Add Product Variants</h1>
+    {% for message in messages %}
+    <span style="color:green;">{{message}}</span>
+    {% endfor %}
+        <div class="col-md-8">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+        <div class="form-group">
+        <label>Select Product</label>
+            <select class="custom-select select2"  name="select_product">
+<!--                <option class="hidden"  selected disabled>Select Product</option>-->
+                {% for x in product %}
+                <option value={{x.id}}>{{x}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+            <div class="form-group">
+        <label>Product Variant Title</label>
+        <input type="text" class="form-control" placeholder="" name="variant_title" required>
+        </div>
+
+            <div class="form-group">
+        <label>Product Variant Price</label>
+        <input type="number" class="form-control" name="variant_price" placeholder="Price provide here exclude GST" required>
+        </div>
+
+            <div class="form-group">
+        <label>Discount(If you want provide Discount on this variants)</label>
+        <input type="number" class="form-control" name="variant_discount" placeholder="If you want provide variant discount(Optional)" >
+        </div>
+                {% if c != "Grocery" %}
+                <div class="form-group">
+        <label>Colour</label>
+        <select class="custom-select select2"  name="select_color">
+<!--                <option class="hidden"  selected disabled>Select Product</option>-->
+                {% for x in color %}
+                <option value={{x.id}}>{{x}}</option>
+                {% endfor %}
+            </select>
+        </div>
+                {% endif %}
+                <div class="form-group">
+        <label>Size</label>
+        <select class="custom-select select2"  name="select_size">
+<!--                <option class="hidden"  selected disabled>Select Product</option>-->
+                {% for x in size %}
+                <option value={{x.id}}>{{x}}</option>
+                {% endfor %}
+            </select>
+        </div>
+            <div class="form-group">
+                <label>Product Description</label>
+                    <textarea class="form-control" rows="6" name="description"></textarea>
+                </div>
+                <div class="form-group">
+                <label>Quantity</label>
+                    <input type="number" class="form-control" name="quantity" required>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Product Front Side Image</label>
+                     <input type="file" class="form-control" name="image_fornt" required>
+                </div>
+                <div class="form-group">
+                    <label>Product Back Side Image</label>
+                     <input type="file" class="form-control" name="image_back" required>
+                </div>
+                <div class="form-group">
+                    <label>Product  Side Image</label>
+                     <input type="file" class="form-control" name="image_side" required>
+                </div>
+
+
+                <br>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Add Product">
+                </form>
+            </div>
+
+</div>
+    </div>
+</div>
+{% endblock %}

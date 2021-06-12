@@ -1,0 +1,139 @@
+{% extends 'user_dashboard.html' %}
+{% load static %}
+{% block title %}UserProfile{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="page has-sidebar-left height-full">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+        <div class="card no-b shadow no-r">
+            <div class="row no-gutters">
+                <div class="col-md-4 b-r">
+                    <div class="text-center p-5 mt-5">
+                        <figure class="avatar avatar-xl">
+                            <img src="/media/{{request.user.user_register.profile_pic}}" alt=""> </figure>
+                        <div>
+
+                            <h4 class="p-t-10">{{request.user.first_name}}&nbsp;{{request.user.last_name}} </h4>
+                            {{request.user.username}}
+                        </div>
+                        <div>
+                            <br>
+                            <h4>Profile Pic Upload</h4>
+                        <form  action=""  method="post" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <span class="btn btn-success mt-3"><input type="file" class="form-control" name="pic" required="required"/></span>
+                            <br>
+                            <br>
+                            <input type="submit" value="Upload" class="btn btn-warning">
+                        </form>
+                            </div>
+                            <div class="mt-5">
+                            <ul class="social social list-inline">
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-youtube"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="p5 b-b">
+                        <div class="pl-4 mt-4">
+                            <h5>Official Information</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Email</h4>
+                                    <span>{{request.user.username}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4">
+                                    <h4 class="text-black">Phone Number</h4>
+                                    <span>{{request.user.user_register.mobile}}</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="p5 b-b">
+                        <div class="pl-4 mt-4">
+                            <h5>Personal Information</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Email</h4>
+                                    <span>{{request.user.username}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4">
+                                    <h4 class="text-black">Phone Number</h4>
+                                    <span>{{request.user.user_register.mobile}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4">
+                                    <h4 class="text-black">Name</h4>
+                                    <span>{{request.user.get_full_name}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="p5">
+                        <div class="pl-4 mt-4">
+                            <h5>Basic Information</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="p-4 no-b-child">
+                                        <h4 class="text-black">First Name</h4>
+                                    <span>{{request.user.first_name}}</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="p-4 no-b-child">
+                                        <h4 class="text-black">Last Name</h4>
+                                    <span>{{request.user.last_name}}</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="p-4 no-b-child">
+                                        <h4 class="text-black">Address</h4>
+                                    <span>{{request.user.user_register.address}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4 no-b-child">
+                                        <h4 class="text-black">Gender</h4>
+                                    <span>{{request.user.user_register.gender}}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/shop_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/shop_responsive.css' %}">
+<style>
+	.zoom {
+  padding: 50px;
+  transition: transform .2s; /* Animation */
+
+}
+
+.zoom:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.imm{
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: contain;
+
+    }
+</style>
+{% endblock %}
+{% block body %}
+
+<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="/media/{{store_detail.store_banner}}" data-speed="0.8"></div>
+	</div>
+<br><br><br><br><br><br><br>
+	<div class="container-fluid">
+     <div class="row" style="padding: 50px;">
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 zoom">
+					<img src="/media/{{store_detail.store_image}}" width="500px" height="500px" class="img-fluid" alt="Responsive image">
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 for-shop-detail">
+					<h4>Shop Details</h4>
+					<p><span style="color: black;">Store Name :</span> {{store_detail.store_name}}</p>
+					<p><span style="color: black;">Store Address :</span> {{store_detail.store_address}}</p>
+					<p><span style="color: black;">Phone :</span> +91-{{store_detail.vendor.store_mobile}}</p>
+					<p><span style="color: black;">Open Time :</span> {{store_detail.store_opening_time}}</p>
+					<p><span style="color: black;">Close Time :</span> {{store_detail.store_closing_time}}</p>
+					<p><span style="color: black;">Close Day :</span> {{store_detail.store_closing_day}}</p>
+					<p><span style="color: black;">Store Type :</span> {{store_detail.store_category}}</p>
+
+				</div>
+			</div>
+    </div>
+
+	<!-- categories by product/store -->
+
+	<div class="viewed">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+
+					{% for z,x in subcat %}
+					<div class="viewed_title_container">
+						<h3 class="viewed_title">{{z}}</h3>
+						<div class="viewed_nav_container">
+<!--							<div class="viewed_nav viewed_prev 1"><i class="fas fa-chevron-left"></i></div>-->
+
+<!--							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>-->
+<!--							<form action="{% url 'product_page' %}" method="post">-->
+<!--								{% csrf_token %}-->
+<!--							<input type="text" hidden value="{{z}}" name="subcat">-->
+<!--								<input type="text" value="{{vendor}}" hidden name="vendor">-->
+<!--							<input type="submit" value="View All" class="btn btn-primary">-->
+<!--								</form>-->
+<a href="/product_page?title={{z}}&vendor={{vendor}}" class="btn btn-primary">View All</a>
+						</div>
+					</div>
+
+					<div class="viewed_slider_container">
+
+						<!-- Recently Viewed Slider -->
+
+						<div class="owl-carousel owl-theme viewed_slider">
+
+								<!-- Recently Viewed Item -->
+							{% for y in x %}
+
+
+							<div class="owl-item">
+								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+									<div class="viewed_image"><a href="{% url 'product_view_page' y.id %}"> <img src="/media/{{y.image}}" class="imm" alt=""></a></div>
+									<div class="viewed_content text-center">
+										<div class="viewed_price"><span></span></div>
+										<div class="viewed_name"><a href="{% url 'product_view_page' y.id %}"><span style="color:lightgreen;">{{y.title}}</span></a></div>
+										<div class="viewed_name"><a href="{% url 'product_view_page' y.id %}"><span style="color:darkorange;">{{y.price}}</span></a></div>
+									</div>
+<!--									<ul class="item_marks">-->
+<!--										<li class="item_mark item_discount">-25%</li>-->
+<!--										<li class="item_mark item_new">new</li>-->
+<!--									</ul>-->
+								</div>
+							</div>
+							{% endfor %}
+
+							<!-- Recently Viewed Item -->
+
+						</div>
+
+					</div>
+					<br><br>
+					{% endfor %}
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/shop_custom.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'user_dashboard.html' %}
+{% load static %}
+{% block title %}UserProfile{% endblock %}
+
+{% block css %}
+<style>
+img{
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: contain;
+
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+
+<div class="page has-sidebar-left height-full">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+        {% if order_featch %}
+{% for x in order_featch %}
+       <div class="card  shadow no-r mb-2">
+            <div class="row no-gutters">
+                <div class="col-md-12 ">
+
+            <div class="card-header white d-flex justify-content-between ">
+                <h4>Your Order Id <span class="badge badge-warning badge-pill s-12">{{x.order_id}}</span></h4>
+				{% if x.payment_id %}
+                <h4>Your Payment Id <span class="badge badge-info badge-pill s-12">{{x.payment_id}}</span></h4>
+				{% endif %}
+            </div>
+            <div class="card-body p-5">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+						<tr class="no-b">
+
+						<th>Paid Amount: <span style="margin-left:10px;font-size:14pt;">Rs {{x.price}}</span></th>
+
+							<th>Payment Mode:<span style="margin-left:10px;font-size:12pt;">{{x.payment_mode}}</span></th>
+                            {% if x.order_status == 'Booked' %}
+							<th>Order Status: &emsp;<span class="badge badge-warning badge-pill s-12"> {{x.order_status}}</span></th>
+
+                            {% elif x.order_status == 'Deliver' %}
+							<th>Order Status: &emsp;<span class="badge badge-success badge-pill s-12"> {{x.order_status}}</span></th>
+
+                            {% else %}
+							<th>Order Status: &emsp;<span class="badge badge-danger badge-pill s-12"> {{x.order_status}}</span></th>
+                            {% endif %}
+                            <th>Book Date:<span style="margin-left:10px;font-size:14pt;">{{x.date_time}}</span> </th>
+						</tr>
+                        <tr class="no-b">
+                            <th>Store Address: <span style="margin-left:10px;font-size:12pt;">{{x.store_user.store_address}}</span></th>
+                            <th>Seller: <span style="margin-left:10px;font-size:14pt;">{{x.store_user.store_name}}</span></th>
+                            <th>Seller Mail:<span style="margin-left:10px;font-size:14pt;">{{x.store_user.user}}</span></th>
+                            {% if x.time_slot %}
+							<th>Time Slot:<span style="margin-left:10px;font-size:12pt;">{{x.time_slot}}</span> </th>
+
+
+                            {% endif %}
+                            {% if x.cancel_date %}
+                            <th>Cancle Date:<span style="margin-left:10px;font-size:12pt;">{{x.cancel_date}}</span></th>
+                            {% endif %}
+                        </tr>
+                        <tr class="no-b">
+                            {% if x.time_slot %}
+                            <th></th>
+                            {% else %}
+                            <th>Delivery Address:<span style="margin-left:10px;font-size:12pt;">{{x.delivery_address.address}}</span> </th>
+                            {% endif %}
+                        </tr>
+                        <tr class="no-b">
+                            <th class="w-25"><h4>Product</h4></th>
+                            <th><h4>Title</h4></th>
+                            <th><h4>Price</h4></th>
+                            <th><h4>Quantity</h4></th>
+
+                        </tr>
+                        {% for y in x.item.all %}
+                        <tr class="no-b">
+
+
+                            <td><img src="/media/{{y.image_fornt}}"></td>
+                            <td>{{y.title}}</td>
+                            <td>{{y.after_discount_price}}</td>
+                            <td>{{y.quantity}}</td>
+
+
+                        </tr>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+
+                {% if x.order_status == 'Booked' %}
+				<div class="col-md-6">
+
+
+<!--					<input type="submit"  class="btn btn-danger" value="Cancel">-->
+                        <button type="button" class="btn btn-danger text-white" data-toggle="modal" data-target="#myModal">Cancel</button>
+
+                </div>
+                {% endif %}
+ <div class="container">
+  <!-- Modal -->
+  <form action="{% url 'order_cancel' %}" method="post">
+        {% csrf_token %}
+      <input type="hidden" name="order_id" value="{{x.order_id}}">
+	<div class="row">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h4 class="modal-title text center"></h4>
+		</div>
+		<p class="text-center text-secondary">Why you cancel this product any problem ?</p>
+	    	<div class="col-lg-12">
+			<textarea  name="reason" rows="4" class="form-control" required="required">
+
+				</textarea>
+		</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" >Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</form>
+</div>
+            </div>
+
+        </div>
+    </div>
+	   </div>
+	   </div>
+
+
+{% endfor %}
+{% else %}
+          <div class="card  shadow no-r mb-2">
+            <div class="row no-gutters">
+                <div class="col-md-12 ">
+
+            <div class="card-header white  justify-content-between ">
+                <center> <h2 class="text-info">No Order Found</h2></center>
+            </div></div></div></div>
+        {% endif %}
+</div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}  {% endblock %}
+
+{% block css %}
+<style>
+	.image{
+	float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: contain;
+	}
+</style>
+{% endblock %}
+
+
+{% block body %}
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Preview</strong></h1><br>
+ <div class="container">
+
+     <div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+
+		<div class="col-lg-12 col-sm-12 hero-feature">
+			<div class="table-responsive">
+				<table class="table table-bordered tbl-cart">
+					<thead>
+						<tr>
+							<td class="hidden-xs">Image</td>
+							<td>Product Name</td>
+							<td>Size</td>
+							<td>Color</td>
+							<td class="td-qty">Quantity</td>
+							<td>PV</td>
+							<td>Sub Total</td>
+
+						</tr>
+					</thead>
+					<tbody>
+					{% for x in cart_featch %}
+						<tr>
+							<td class="hidden-xs">
+
+									<img src="/media/{{x.variant_id.image_fornt}}" class="image" alt="Age Of Wisdom Tan Graphic Tee" title="">
+
+							</td>
+							<td>{{x.variant_id.title}}
+							</td>
+							<td>
+								{{x.variant_id.size}}
+							</td>
+							<td>{{x.variant_id.color}}</td>
+							<td class="text-center">
+								{{x.quantity}}
+							</td>
+							<td class="price">{{x.variant_id.point_value}}</td>
+							<td>Rs.{{x.final_price}}</td>
+
+						</tr>
+					{% endfor %}
+						<tr>
+							<td colspan="6" align="right">Total</td>
+							<td class="total" colspan="2"><b>Rs.{{total_pay}}</b>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<!-- End Cart -->
+
+<!--	&lt;!&ndash; End Cart &ndash;&gt;-->
+	 {% if time_slot %}
+	 <div class="col-lg-12" style="border:1px solid skyblue; padding:20px; border-radius:25px;">
+		 <div class="contact_form_container">
+
+
+			 <div class="form-group">
+			 <h4>Selected Time Slot</h4><hr>
+			 <div class="container">
+<div class="row">
+   <div class="container">
+
+	   {{time_slot}}
+
+</div>
+
+  </div>
+</div>
+
+		 </div>
+
+	 </div>
+
+ </div>
+{% endif %}
+<div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+    <div class="contact_form_container">
+<div class="row"><!--row-->
+
+	{% if refer %}
+	<div class="col-lg-6">
+		<div class="form-group">
+			<input type="text" name="refer" class="form-control" value="{{refer}}" readonly placeholder="Enter Refer Code if you have">
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+			<input type="text" value="{{position}}" readonly class="form-control">
+		</div>
+	</div>
+	{% endif %}
+	<input type="hidden" value="{{store_user}}" name="store_user">
+	{% if address %}
+    <div class="col-lg-6"><!--col-lg-6-->
+        <div class="form-group">
+            <input type="text" class="form-control" value="{{name}}" readonly aria-describedby="emailHelp" placeholder="Enter Your Full Name " name="name" required="">
+            </div>
+        </div>
+
+        <div class="col-lg-6"><!--col-lg-6-->
+            <div class="form-group">
+            <input type="number" class="form-control" value="{{phone}}" readonly aria-describedby="emailHelp" placeholder="Enter Your Phone " name="phone" required="">
+            </div>
+        </div>
+
+    </div>
+    <div class="row"><!--row-->
+        <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+            <input type="email" class="form-control" value="{{email}}" readonly aria-describedby="emailHelp" placeholder="Enter Your Email " name="email" required="">
+            </div>
+        </div>
+
+        <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+            <input type="text" class="form-control" value="{{address}}" readonly aria-describedby="emailHelp" id="address" placeholder="Enter Your Address" name="address" required="">
+            </div>
+        </div>
+
+         <div class="col-lg-4"><!--col-lg-4-->
+            <div class="form-group">
+
+                <input type="text" class="form-control" value="{{city}}"  readonly aria-describedby="emailHelp" placeholder="Enter Your City" name="city" required="">
+                </div>
+            </div>
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <input type="number" class="form-control" value="{{pincode}}" readonly  aria-describedby="emailHelp" placeholder="Pincode" name="pincode" required="">
+                </div>
+            </div>
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <input type="text" class="form-control" value="{{locality}}" readonly aria-describedby="emailHelp" placeholder="Locality" name="locality" required="">
+                </div>
+            </div>
+
+
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <input type="text" class="form-control" value="{{landmark}}" readonly aria-describedby="emailHelp" placeholder="Landmark (Optional)" name="landmark" >
+                </div>
+            </div>
+
+		<div class="col-lg-3"><!--col-lg-4-->
+            <div class="form-group">
+                <input type="number" class="form-control" readonly value="{{alternate_mobile}}" aria-describedby="emailHelp" placeholder="Alternate Mobile(Optional)" name="alternate_phone" >
+                </div>
+            </div>
+		{% endif %}
+    </div>
+</div>
+	<form action="{% url 'payment_success_cod' %}" method="post">
+		{% csrf_token %}
+		<input type="hidden" value="{{name}}" name="name">
+					<input type="hidden" value="{{phone}}" name="phone">
+					<input type="hidden" value="{{email}}" name="email">
+					<input type="hidden" value="{{address}}" name="address">
+					<input type="hidden" value="{{city}}" name="city">
+					<input type="hidden" value="{{pincode}}" name="pincode">
+					<input type="hidden" value="{{locality}}" name="locality">
+					<input type="hidden" value="{{landmark}}" name="landmark">
+					<input type="hidden" value="{{alternate_mobile}}" name="alternate_mobile">
+					<input type="hidden" value="{{refer}}" name="refer">
+					<input type="hidden" value="{{position}}" name="position">
+					<input type="hidden" value="{{order_mode}}" name="order_mode">
+		<input type="hidden" value="{{payment_mode}}" name="payment_mode">
+		<input type="hidden" value="{{time_slot}}" name="time_slot">
+		<input type="submit"  class="btn btn-warning" value="Place Order"></input>
+	</form>
+
+
+
+    </div>
+</div>
+
+
+
+
+<br><br>
+
+
+{% endblock %}

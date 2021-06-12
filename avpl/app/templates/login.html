@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+
+{% load static %}
+{% block title %} Login {% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_responsive.css' %}">
+{% endblock %}
+
+
+{% block body %}
+
+ <br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Login</strong></h1><br>
+
+
+<div class="container register" style="border-radius: 1rem;">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p class="text-white">You are 30 seconds away from earning your own money!</p>
+<!--                        <a href="{% url 'registration' %}"><input type="submit" name="" value="new registration"/></a><br/>-->
+                    </div>
+                    <div class="col-md-9 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">User</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <h3 class="register-heading">Login</h3>
+
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                <div class="row register-form text-center">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="email address *" name="email" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" placeholder="Password *" name="password" value="" />
+                                        </div>
+
+                                    <div class="mt-2">
+                              {% for message in messages %}
+                                    <span style="color:red;">{{message}}</span>
+                                {% endfor %}</div>
+
+                                    </div>
+                                    <div class="col-md-6">
+										<input type="submit" class="btnRegister"  value="Login"/>
+                                    </div>
+                                                        <div class="col-md-6">
+                                                            <a href="{% url 'forget_password' %}">Forget Password ?</a>
+                                                        </div>
+                                        <br><br><br>
+<!--                                    <div class="col-md-12">-->
+
+<!--										<a href="{% provider_login_url 'facebook' method='oauth2' %}" class="btn btn-primary btn-block">-->
+<!--											<i class="fab fa-facebook-square"></i> Login with Facebook </a>-->
+
+<!--									   <a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-block"><i class="fab fa-google"></i> Login with Google </a>-->
+<!--                                    </div>-->
+
+                                </div>
+                                    </form>
+							</div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<br><br>
+
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'js/regular_custom.js' %}"></script>
+{% endblock %}

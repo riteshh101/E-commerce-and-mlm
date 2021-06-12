@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}  {% endblock %}
+
+{% block css %}   {% endblock %}
+
+
+{% block body %}
+
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>Select Time Slot</strong></h1><br>
+{% for message in messages %}
+<center><spna class="text-danger">{{message}}</spna></center>
+{% endfor %}
+ <div class="container">
+       {% if slot %}
+<form action="" method="post">
+    {% csrf_token %}
+     <div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+
+		<div class="col-lg-12 col-sm-12 hero-feature">
+			<div class="form-group">
+                <ul class="logos_list">
+
+                    {% for x in slot %}
+                    <li><input type="radio" name="time_slot" value="10:00AM To 12:00PM" required><span style="margin-left:10px;">{{x.from_time}} To {{x.to_time}}</span></li>
+                                    {% endfor %}
+
+</ul>
+            </div>
+
+		</div>
+	</div>
+<input type="hidden" value="{{order_mode}}" name="order_mode">
+    <!--refer code for -->
+
+    <div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+    <div class="contact_form_title text-left text-primary">Enter Refer Code If You Have...</div>
+<div class="row">
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Enter Refer Code if you have (Optional)" name="refer_code">
+  </div>
+  <div class="col">
+<select name="value" class="form-control">
+				<option selected="left" value="left">Left</option>
+				<option value="right">Right</option>
+			</select>
+  </div>
+</div>
+
+
+    </div>
+
+
+    <!-- end refer code for -->
+
+
+
+<div class="col-lg-12" style="border: 1px solid skyblue; padding: 20px; border-radius: 25px;">
+    <div class="contact_form_title text-left text-primary">Select Order Mode</div>
+<div class="form-group">
+<ul class="logos_list">
+	<li><input type="radio" name="payment" value="Wallet" required><img src="{% static 'images/wallet.png' %}" title="Wallet" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+	<li><input type="radio" name="payment" value="Razorpay" required><img src="{% static 'images/razorpay.png' %}" title="Razorpay" style="width: 80px; height: 60px;margin-left:10px;"></li>
+
+<li><input type="radio" name="payment" value="COD" required><img src="{% static 'images/cod.png' %}" title="Cash On Delivery" style="width: 80px; height: 60px;margin-left:10px;"> </li>
+
+</ul>
+
+</div>
+
+
+            <div class="contact_form_button text-center">
+<button type="submit" class="btn btn-info">Continue for Pay</button>
+</div>
+    </div>
+    </form>
+     {% else %}
+     <div>
+         <center>
+         <img src="{% static 'images/time2.png' %}" width="20%"></center>
+     </div>
+                    <h3 class="text-center mt-5 my-5">No slot Available this Day try another Day..</h3>
+     <div>
+         <h4 class="text-center my-5"><a href="{% url 'home' %}"> Go Back Home Click Here..</a></h4>
+     </div>
+                    {% endif %}
+</div>
+{% endblock %}

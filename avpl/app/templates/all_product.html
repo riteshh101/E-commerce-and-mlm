@@ -1,0 +1,116 @@
+{% extends 'vendor_dashboard.html' %}
+
+{% block title %} Add Product {% endblock %}
+
+{% block css %}
+<style>
+img{
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: contain;
+
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full bg-white">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+
+         <div class="container-fluid animatedParent animateOnce my-3">
+             <h2 class="text-center"><span style="color:blue;">All Product Details</span></h2><hr>
+        <div class="animated fadeInUpShort">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card no-b shadow">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover ">
+                                    {% if product %}
+                                    <tbody>
+                                    <tr style="font-weight:bold;">
+                                        <td>Sr No.</td>
+                                        <td>Image</td>
+                                        <td>Title</td>
+                                        <td>Brand</td>
+                                        <td>Price</td>
+                                        <td>Discount</td>
+                                        <td>GST</td>
+                                        <td>Variant</td>
+                                        <td>Created/Update</td>
+                                        <td>Edit</td>
+                                        <td>Remove</td>
+                                        <td>All Variant</td>
+                                    </tr>
+                                    {% for x in product %}
+                                    <tr>
+                                        <td>
+                                           <span style="font-size:14pt;"> {{forloop.counter}}</span>
+                                        </td>
+                                        <td class="w-10">
+                                            <img src="/media/{{x.image}}" width="70%" alt="">
+                                        </td>
+                                        <td>
+                                            <h6>{{x.title}}</h6>
+                                            <small class="text-muted">{{x.subcategory}}</small>
+                                        </td>
+                                        <td>{{x.brand_name}}</td>
+                                        <td><span class="">Rs.{{x.price}}</span></td>
+                                        {% if x.discount_percent %}
+                                        <td><span>{{x.discount_percent}}%</span></td>
+                                        {% else %}
+                                        <td><span>-</span></td>
+                                        {% endif %}
+                                        <td>{{x.gst_percent}}%</td>
+                                        <td>{{x.variant}}</td>
+                                        <td>
+
+                                            <span><i class="icon icon-calendar"></i>{{x.created_date}}</span><br>
+                                            {% if x.update_date %}
+                                            <span><i class="icon icon-calendar"></i>{{x.update_date}}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="/edit_product?data={{x.id}}" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="/remove_product?a={{x.id}}" class="btn-fab btn-fab-sm btn-danger shadow text-white"><i class="icon-trash"></i></a>
+                                        </td>
+                                        <td>
+                                            <a href="/all_variant?a={{x.id}}" class="btn-fab btn-fab-sm btn-warning shadow text-white"><i class="icon-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    {% else %}
+                                    <h2 class="text-center">No Data Found.</h2>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <nav class="pt-3" aria-label="Page navigation">-->
+<!--                <ul class="pagination">-->
+<!--                    <li class="page-item"><a class="page-link" href="#">Previous</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">1</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">2</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">3</a>-->
+<!--                    </li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#">Next</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+{% endblock %}

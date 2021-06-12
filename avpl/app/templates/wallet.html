@@ -1,0 +1,131 @@
+{% extends 'user_dashboard.html' %}
+{% load static %}
+{% block title %} Edit Profile {% endblock %}
+
+{% block css %}  {% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full" style="background-color:white;">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5" >
+
+
+
+
+        <div class="row my-5">
+            <div class="col-lg-3">
+                <div class="counter-box p-40 white shadow2 r-5">
+                    <div class="float-right">
+                        <span class="icon icon-money s-48"></span>
+                    </div>
+                    <div class=" s-36">{{direct_refer_pv}}</div>
+                    <h6 class="counter-title">PV Earn By Direct Refer </h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="counter-box p-40 white shadow2 r-5">
+                    <div class="float-right">
+                        <span class="icon icon-money s-48"></span>
+                    </div>
+                    <div class="sc-counter.float s-36">1200</div>
+                    <h6 class="counter-title">PV Earn By Self</h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="counter-box p-40 white shadow2 r-5">
+                    <div class="float-right">
+                        <span class="icon icon-money s-48"></span>
+                    </div>
+                    <div class=" s-36">1200</div>
+                    <h6 class="counter-title">PV Earn By Group</h6>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="counter-box p-40 gradient  text-white shadow2 r-5">
+                    <div class="float-right">
+                        <span class="icon icon-wallet s-48"></span>
+                    </div>
+                    <div class=" s-36">550</div>
+                    <h6 class="counter-title">Wallet</h6>
+                </div>
+            </div>
+        </div>
+        <!--States-->
+        <div class="my-5">
+            <ul id="myTab4" role="tablist" class="nav nav-pills mb-3">
+                <li>
+                    <a class="nav-link active show s-16 font-weight-lighter r-30 " id="tab1" data-toggle="tab" href="#v-pills-tab1" role="tab" aria-controls="tab1" aria-expanded="true" aria-selected="true">Basic Information</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="v-pills-tab1" role="tabpanel" aria-labelledby="v-pills-tab1">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card no-b my-3 shadow2">
+                                <div class="card-body pb-5 pl-5 pr-5">
+                                    <div style="height: 400px">
+                                        <h4> <span class="badge badge-warning badge-pill s-12">Add PV Wallet</span></h4>
+                                        <div class="box-body table-responsive no-padding mt-5">
+
+                                            <form action="" method="post">
+                                                {% csrf_token %}
+                                                <label class="my-3">Select PV</label>
+                                                <select class="custom-select select2"  name="select_pv">
+
+                                                    <option value="Direct_Refer_PV">Direct_Refer_PV</option>
+
+                                                </select>
+                                                <label class="my-3">Enter PV(min 100pv required) /Note:-100 PV is equal to 10 Rs</label>
+
+                                                <input type="number" class="form-control" required name="pv_point">
+                                                <input type="submit" value="Add" class="mt-5 btn btn-primary">
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-md-6">
+                            <div class="card no-b my-3 shadow2">
+                                <div class="card-body pb-5 pl-5 pr-5">
+                                    <div style="height: 400px">
+                                <h4><span class="badge badge-warning badge-pill s-12">Wallet Transactions</span></h4>
+                                    <div class="box-body table-responsive no-padding">
+                                        <table class="table table-hover">
+                        <tbody>
+                        <tr class="no-b">
+                            <th class="w-25"><h4>User</h4></th>
+                            <th><h4>Description</h4></th>
+                            <th><h4>Date/Time</h4></th>
+                            <th><h4>Status</h4></th>
+                            <th><h4>PV</h4></th>
+                        </tr>
+                        <tr>
+                            <td>sosus_rdl@gmail.com</td>
+                            <td>Developer</td>
+                            <td>12/1/212//1212</td>
+                            <td><span class="badge badge-success badge-pill s-12">Credit</span></td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>sosus_rdl@gmail.com</td>
+                            <td>Developer</td>
+                            <td>12/1212/1212/1212</td>
+                            <td><span class="badge badge-danger badge-pill s-12">Withdraw</span></td>
+                            <td>12</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

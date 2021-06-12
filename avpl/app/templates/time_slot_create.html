@@ -1,0 +1,109 @@
+{% extends 'vendor_dashboard.html' %}
+
+{% block title %} Add Product {% endblock %}
+
+{% block css %}
+<style>
+img{
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: contain;
+
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full bg-white">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+
+         <div class="container-fluid animatedParent animateOnce my-3">
+             <h2 class="text-center"><span style="color:blue;">Time Slot</span></h2><hr>
+             <h4>Create Time Slot</h4>
+             <form action="" method="post">
+                 {% csrf_token %}
+                <div class="row g-3">
+  <div class="col-sm-3">
+      <label>From</label>
+    <input type="time" class="form-control" name="from_time" placeholder="From" required>
+  </div>
+  <div class="col-sm-3">
+      <label>To</label>
+    <input type="time" class="form-control" name="to_time" placeholder="To" required>
+  </div>
+
+  <div class="col-sm-3">
+      <label>Day</label>
+    <select  class="form-control" name="day">
+      <option selected value="Sunday">Sunday</option>
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+    </select>
+  </div>
+  <div class="col-sm-2 mt-4">
+
+    <input type="submit" class="btn btn-primary" value="Create">
+  </div>
+</div>
+             </form><hr>
+        <div class="animated fadeInUpShort">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card no-b shadow">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover ">
+                                    {% if time_slot %}
+                                    <tbody>
+                                    <tr style="font-weight:bold;">
+                                        <td>Sr No.</td>
+                                        <td>From</td>
+                                        <td>To</td>
+                                        <td>Day</td>
+                                        <td>Created Date</td>
+                                        <td>Remove</td>
+                                    </tr>
+                                    {% for x in time_slot %}
+                                    <tr>
+                                        <td>
+                                           <span style="font-size:14pt;"> {{forloop.counter}}</span>
+                                        </td>
+
+                                        <td>{{x.from_time}}</td>
+                                        <td>{{x.to_time}}</td>
+
+                                        <td>{{x.day}}</td>
+
+                                            <td>
+                                            <span><i class="icon icon-calendar"></i>{{x.date_time}}</span><br>
+
+                                        </td>
+                                        <td>
+                                            <a href="/remove_slot?data={{x.id}}" class="btn-fab btn-fab-sm btn-danger shadow text-white"><i class="icon-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    {% else %}
+                                    <h2 class="text-center">No Data Found.</h2>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    </div>
+
+{% endblock %}

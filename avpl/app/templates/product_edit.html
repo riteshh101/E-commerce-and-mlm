@@ -1,0 +1,58 @@
+{% extends 'vendor_dashboard.html' %}
+
+{% block title %} Add Product {% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+<div class="page has-sidebar-left height-full bg-white">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+<div class="container">
+<h1 class="my-5" style="color:blue;">Product Edit</h1>
+    {% for message in messages %}
+    <span style="color:green;">{{message}}</span>
+    {% endfor %}
+        <div class="col-md-8">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="form-group">
+        <label>Product Title</label>
+        <input type="text" class="form-control" placeholder="" name="title" value="{{product.title}}" required>
+        </div>
+
+            <div class="form-group">
+        <label>Product Price</label>
+        <input type="number" class="form-control" value="{{product.price}}" name="price" placeholder="Price provide here exclude GST" required>
+        </div>
+
+            <div class="form-group">
+        <label>GST</label>
+        <input type="number" class="form-control" name="gst" value="{{product.gst_percent}}" placeholder="" required>
+        </div>
+
+                <div class="form-group">
+        <label>Discount(If you want provide Discount on this Product every variants)</label>
+        <input type="number" class="form-control" name="discount" value="{{product.discount_percent}}" placeholder="If you want provide Discount on this Product every variants..">
+        </div>
+
+
+                <div class="form-group">
+                <label>Front View Product Image Upload</label>
+                    <input type="file" class="form-control" name="front_image" >
+                </div>
+
+
+
+
+                <br>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Add Product">
+                </form>
+            </div>
+
+</div>
+    </div>
+</div>
+{% endblock %}

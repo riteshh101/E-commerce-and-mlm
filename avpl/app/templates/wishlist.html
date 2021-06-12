@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Wishlist {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/slick-1.8.0/slick.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+<style>
+	.checked {
+  color: orange;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+	<!-- Characteristics -->
+
+
+<h2 class="text-uppercase text-primary text-center"><strong><u>My Wishlist</u></strong></h2> <br><br>
+	<!-- Deals of the week -->
+<div>
+{% for message in messages %}
+<center><span style="color:red;font-size:16pt;">{{message}}</span></center>
+{% endfor %}
+	</div>
+	<div class="deals_featured">
+		<div class="container">
+			{% for x,y in li %}
+			<div class="row my-2">
+				<div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center justify-content-start">
+			          <a href="{% url 'product_view_page' x.id %}"> <img src="/media/{{x.image_back}}" width="40"  alt=""></a>
+				</div>
+				<div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center justify-content-start">
+			          <p><strong>{{x.title}}</strong> <br>
+						  {{x.color}}<br>
+						  {{x.size}}<br>
+						Rs. {{x.price}}</p>
+				</div>
+				<div class="col-lg-4 d-flex flex-lg-row flex-column align-items-center justify-content-start">
+					<form action="/cart/" method="post">
+					{% csrf_token %}
+						<input type="hidden" value="{{quantity}}"  name="quantity">
+						<input type="hidden" value="{{x.id}}" name="id">
+					<input type="submit"  class="btn btn-primary btn-md" value="Add To Cart"/> &nbsp;
+						</form>
+					<a href="{% url 'wishlist_remove' y.id %}" class="btn btn-outline-danger btn-md">Remove</a>
+			  </div>
+
+			</div>
+			{% endfor %}
+
+		</div>
+	</div>
+
+	<br><br> <br><br>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'plugins/slick-1.8.0/slick.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends 'vendor_dashboard.html' %}
+{% load static %}
+{% block title %}Vendor Profile{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="page has-sidebar-left height-full">
+    <div class="container-fluid relative animatedParent animateOnce p-lg-5">
+        <div class="card no-b shadow no-r">
+            <div class="row no-gutters">
+                <div class="col-md-4 b-r">
+                    <div class="text-center p-5 mt-5">
+                        <img src="/media/{{store.store_banner}}"/>
+                        <figure class="avatar avatar-xl">
+                            <img src="/media/{{store.store_logo}}" alt=""> </figure>
+
+                        <div>
+
+                            <h4 class="p-t-10">{{store.store_name}} </h4>
+
+                        </div>
+
+                            <div class="mt-5">
+                            <ul class="social social list-inline">
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-youtube"></i></a></li>
+                                <li class="list-inline-item"><a href="#" class="grey-text"><i class="icon-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="p5 b-b">
+                        <div class="pl-4 mt-4">
+                            <h5>Store Information</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Name</h4>
+                                    <span>{{store.store_name}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Address</h4>
+                                    <span>{{store.store_address}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Category</h4>
+                                    <span>{{store.store_category}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Registration Number</h4>
+                                    <span>{{store.store_registration_number}}</span>
+                                </div>
+                            </div>
+                                <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Closing Day </h4>
+                                    <span>{{store.store_closing_day}}</span>
+                                </div>
+                            </div>
+
+                                <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Closing Time </h4>
+                                    <span>{{store.store_closing_time}}</span>
+                                </div>
+                            </div>
+
+                                <div class="col-md-4">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store Opening Time </h4>
+                                    <span>{{store.store_opening_time}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="p-4">
+                                    <h4 class="text-black">Store About</h4>
+                                    <span>{{store.store_description}}</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+{% endblock %}

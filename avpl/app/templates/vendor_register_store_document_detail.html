@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Vendor Registration {% endblock %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/regular_responsive.css' %}">
+
+{% endblock %}
+
+{% block body %}
+
+<br><br>
+    <h1 class="text-primary  text-center text-uppercase"><strong>New Registration</strong></h1><br>
+
+
+      <div class="container register" style="border-radius: 1rem;">
+                <div class="row">
+                    <div class="col-md-3 register-left">
+                        <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+                        <h3>Welcome</h3>
+                        <p class="text-white">You are 30 seconds away from earning your own money!</p>
+                        <br/>
+                    </div>
+                    <div class="col-md-9 register-right">
+                        <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Vendor </a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                <h3 class="register-heading">Vendor Store Document Details Form </h3>
+
+
+
+                                {% for message in messages %}
+                                    <span style="color:navy;">{{message}}</span>
+                                {% endfor %}
+                                <form action="{% url 'vendor_registration_document_deatil' %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                <div class="row register-form">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Aadhar Number <span style="color:red;">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Aadhar Number " required="required" name="aadhar_number" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Aadhar Fornt Side Image <span style="color:red;">*</span></label>
+                                            <input type="file" class="form-control"  name="aadhar_image_front" required="required" value="" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Aadhar Back Side Image <span style="color:red;">*</span></label>
+                                            <input type="file" class="form-control"  name="aadhar_image_back" required="required" value="" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>GST Number <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" placeholder="GST Number " required="required"  name="store_gst" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PanCard Number <span style="color:red;">*</span></label>
+                                            <input type="text" class="form-control" placeholder="PanCard Number " required="required" name="pancard_number" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>PanCard Image <span style="color:red;">*</span></label>
+                                            <input type="file" name="pancard_image" class="form-control" required="required">
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Razor Pay ID</label>
+                                            <input type="text"  class="form-control" placeholder="Razor Pay ID " name="razorpay_id"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Store Shipping Policy</label>
+                                            <input type="file" class="form-control" name="store_shiping_policy">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Store Return Policy</label>
+                                            <input type="file" class="form-control"  name="store_return_policy" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Bank Name <span style="color:red;">*</span></label>
+                                            <input type="text"  class="form-control" placeholder="Bank Name " required="required" name="bank_name"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Bank IFSC <span style="color:red;">*</span></label>
+                                            <input type="text"  class="form-control" placeholder="Bank IFSC " required="required" name="bank_ifsc"/>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <label>Bank Account Number <span style="color:red;">*</span></label>
+                                            <input type="number" class="form-control" placeholder="Bank Account Number " required="required" name="bank_account_number">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Bank Passbook Image Upload <span style="color:red;">*</span></label>
+                                            <input type="file"  class="form-control" required="required" name="bank_passbook_image"/>
+                                        </div>
+
+
+                                        <input type="submit" class="btnRegister"  value="Register"/>
+                                    </div>
+                                </div>
+                                    </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+<br><br>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script src="{% static 'js/regular_custom.js' %}"></script>
+
+{% endblock %}
